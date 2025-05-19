@@ -1,4 +1,4 @@
-https://outlook.live.com/owa/import { Link } from "wouter";
+Import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ServiceCard from "@/components/ServiceCard";
