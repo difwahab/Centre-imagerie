@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+https://outlook.live.com/owa/import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ServiceCard from "@/components/ServiceCard";
@@ -72,7 +72,7 @@ export default function Home() {
             <div className="md:w-5/12 lg:w-5/12">
               <div className="bg-white/10 backdrop-blur-sm p-2 rounded-2xl shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1581595219373-88de4e18c25c?q=80&w=800&auto=format&fit=crop"
+                  src="https://unsplash.com/fr/photos/un-patient-subit-un-examen-de-tomodensitometrie-MMCZI0G0ORU"
                   alt="Scanner moderne au Centre d'Imagerie Benameur"
                   className="rounded-xl shadow-xl w-full object-cover"
                 />
