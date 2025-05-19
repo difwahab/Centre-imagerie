@@ -3,24 +3,24 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
-import { 
-  CheckCircle, 
-  Calendar, 
-  Users, 
-  Settings, 
+import {
+  CheckCircle,
+  Calendar,
+  Users,
+  Settings,
   Clock,
   ChevronRight,
-  BadgeCheck
+  BadgeCheck,
 } from "lucide-react";
 
-import { 
-  services, 
-  testimonials, 
+import {
+  services,
+  testimonials,
   features,
   equipmentBenefits,
   teamBenefits,
   heroImages,
-  equipmentImages
+  equipmentImages,
 } from "@/lib/constants";
 
 export default function Home() {
@@ -37,7 +37,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-secondary/90"></div>
         </div>
-        
+
         <div className="relative z-10 pt-24 pb-20">
           <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-1/2 mb-10 md:mb-0 text-white">
@@ -48,7 +48,8 @@ export default function Home() {
                 Excellence en imagerie médicale à Oran
               </h1>
               <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-lg">
-                Des diagnostics précis et fiables réalisés par notre équipe de spécialistes avec des équipements de dernière génération.
+                Des diagnostics précis et fiables réalisés par notre équipe de
+                spécialistes avec des équipements de dernière génération.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/rendez-vous">
@@ -93,7 +94,9 @@ export default function Home() {
               Services d'imagerie médicale
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Nous proposons une gamme complète de services d'imagerie médicale avec des équipements de dernière génération pour des diagnostics précis.
+              Nous proposons une gamme complète de services d'imagerie médicale
+              avec des équipements de dernière génération pour des diagnostics
+              précis.
             </p>
           </div>
 
@@ -119,7 +122,10 @@ export default function Home() {
                   Des équipements médicaux avancés
                 </h3>
                 <p className="text-gray-700 mb-6 leading-relaxed">
-                  Notre centre est équipé des technologies d'imagerie médicale les plus récentes pour garantir des diagnostics précis et fiables, avec une attention particulière portée au confort du patient.
+                  Notre centre est équipé des technologies d'imagerie médicale
+                  les plus récentes pour garantir des diagnostics précis et
+                  fiables, avec une attention particulière portée au confort du
+                  patient.
                 </p>
                 <ul className="space-y-4">
                   {equipmentBenefits.map((benefit, index) => (
@@ -139,7 +145,10 @@ export default function Home() {
               </div>
               <div className="lg:w-1/2 grid grid-cols-2 gap-1">
                 {equipmentImages.slice(0, 4).map((item, index) => (
-                  <div key={index} className="relative overflow-hidden group h-48 lg:h-full">
+                  <div
+                    key={index}
+                    className="relative overflow-hidden group h-48 lg:h-full"
+                  >
                     <img
                       src={item.image}
                       alt={item.title}
@@ -181,23 +190,35 @@ export default function Home() {
                 Une équipe médicale hautement qualifiée
               </h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                Le Centre D'Imagerie Benameur réunit des radiologues et des professionnels de santé hautement qualifiés pour vous offrir des services d'imagerie médicale exceptionnels.
+                Le Centre D'Imagerie Benameur réunit des radiologues et des
+                professionnels de santé hautement qualifiés pour vous offrir des
+                services d'imagerie médicale exceptionnels.
               </p>
               <p className="text-gray-700 mb-8 leading-relaxed">
-                Notre équipe s'engage à fournir des diagnostics précis dans un environnement accueillant, en plaçant le bien-être du patient au cœur de nos préoccupations.
+                Notre équipe s'engage à fournir des diagnostics précis dans un
+                environnement accueillant, en plaçant le bien-être du patient au
+                cœur de nos préoccupations.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {teamBenefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                  <div
+                    key={index}
+                    className="flex items-center bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                  >
                     <div className="bg-primary/10 p-3 rounded-lg mr-4">
-                      {benefit.icon === "user-md" ? 
-                        <Users className="h-6 w-6 text-primary"/> : 
-                        <BadgeCheck className="h-6 w-6 text-primary"/>
-                      }
+                      {benefit.icon === "user-md" ? (
+                        <Users className="h-6 w-6 text-primary" />
+                      ) : (
+                        <BadgeCheck className="h-6 w-6 text-primary" />
+                      )}
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-900">{benefit.title}</h4>
-                      <p className="text-sm text-gray-600">{benefit.subtitle}</p>
+                      <h4 className="font-bold text-gray-900">
+                        {benefit.title}
+                      </h4>
+                      <p className="text-sm text-gray-600">
+                        {benefit.subtitle}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -218,7 +239,8 @@ export default function Home() {
               Ce que disent nos patients
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Découvrez l'expérience de nos patients avec nos services d'imagerie médicale et notre équipe.
+              Découvrez l'expérience de nos patients avec nos services
+              d'imagerie médicale et notre équipe.
             </p>
           </div>
 
@@ -235,11 +257,15 @@ export default function Home() {
               />
             ))}
           </div>
-          
+
           <div className="mt-12 text-center">
             <Link href="/temoignages">
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-                Voir plus de témoignages <ChevronRight className="ml-1 h-4 w-4" />
+              <Button
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary hover:text-white"
+              >
+                Voir plus de témoignages{" "}
+                <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -257,27 +283,37 @@ export default function Home() {
               Notre engagement envers vous
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Nous nous engageons à fournir des services d'imagerie médicale de haute qualité avec une attention particulière à chaque patient.
+              Nous nous engageons à fournir des services d'imagerie médicale de
+              haute qualité avec une attention particulière à chaque patient.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="bg-white border-none overflow-hidden hover:shadow-xl transition-shadow">
+              <Card
+                key={index}
+                className="bg-white border-none overflow-hidden hover:shadow-xl transition-shadow"
+              >
                 <div className="h-40 overflow-hidden">
-                  <img 
-                    src={feature.image} 
+                  <img
+                    src={feature.image}
                     alt={feature.title}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 mx-auto -mt-10 rounded-full bg-white flex items-center justify-center shadow-lg text-primary mb-4">
-                    {feature.icon === "users" ? <Users className="h-6 w-6" /> : 
-                     feature.icon === "cog" ? <Settings className="h-6 w-6" /> : 
-                     <Clock className="h-6 w-6" />}
+                    {feature.icon === "users" ? (
+                      <Users className="h-6 w-6" />
+                    ) : feature.icon === "cog" ? (
+                      <Settings className="h-6 w-6" />
+                    ) : (
+                      <Clock className="h-6 w-6" />
+                    )}
                   </div>
-                  <h3 className="text-xl font-bold mb-3 font-heading">{feature.title}</h3>
+                  <h3 className="text-xl font-bold mb-3 font-heading">
+                    {feature.title}
+                  </h3>
                   <p className="text-gray-600">{feature.description}</p>
                 </CardContent>
               </Card>
@@ -285,9 +321,12 @@ export default function Home() {
           </div>
 
           <div className="mt-16 text-center bg-gradient-to-r from-primary to-secondary p-10 rounded-2xl shadow-xl text-white">
-            <h3 className="text-3xl font-bold mb-6">Prêt à prendre rendez-vous?</h3>
+            <h3 className="text-3xl font-bold mb-6">
+              Prêt à prendre rendez-vous?
+            </h3>
             <p className="text-lg mb-8 max-w-2xl mx-auto opacity-90">
-              Notre équipe de professionnels est à votre disposition pour répondre à tous vos besoins en matière d'imagerie médicale.
+              Notre équipe de professionnels est à votre disposition pour
+              répondre à tous vos besoins en matière d'imagerie médicale.
             </p>
             <Link href="/rendez-vous">
               <Button
