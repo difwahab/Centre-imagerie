@@ -72,7 +72,7 @@ export default function Home() {
             <div className="md:w-5/12 lg:w-5/12">
               <div className="bg-white/10 backdrop-blur-sm p-2 rounded-2xl shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1581595219373-88de4e18c25c?q=80&w=800&auto=format&fit=crop"
+                  src="https://plus.unsplash.com/premium_photo-1744227702090-12819209183f?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Scanner moderne au Centre d'Imagerie Benameur"
                   className="rounded-xl shadow-xl w-full object-cover"
                 />
