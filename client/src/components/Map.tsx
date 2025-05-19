@@ -38,7 +38,15 @@ export default function Map() {
         leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
         leafletScript.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
         leafletScript.crossOrigin = '';
-        leafletScript.onload = initMap;
+        leafletScript.onload = () => {
+  // ✅ Attendre que Leaflet soit bien chargé dans window.L
+  const interval = setInterval(() => {
+    if (window.L) {
+      clearInterval(interval);
+      initMap();
+    }
+  }, 100);
+};;
         document.head.appendChild(leafletScript);
       } else {
         // If script is already loaded, initialize map directly
