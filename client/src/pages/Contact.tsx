@@ -15,7 +15,6 @@ import { toast } from '@/components/ui/use-toast';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -30,7 +29,7 @@ const formSchema = z.object({
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
-export function Contact() {
+function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   const form = useForm<ContactFormValues>({
@@ -68,11 +67,11 @@ export function Contact() {
   return (
     <section className="py-16 px-4 md:px-8 lg:px-16 bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-center">
-        {/* Left side – Image and Info */}
+        {/* Côté gauche – Image et infos */}
         <div>
           <h2 className="text-3xl font-bold mb-4">Contactez-nous</h2>
           <p className="text-gray-600 mb-6">
-            Pour toute question, demande de rendez-vous ou information complémentaire, n'hésitez pas à nous écrire via ce formulaire.
+            Pour toute question, demande de rendez-vous ou information complémentaire, n&apos;hésitez pas à nous écrire via ce formulaire.
           </p>
           <ul className="space-y-2 text-gray-700">
             <li><strong>Adresse :</strong> 32 Boulevard Hammou Boutlelis, Oran</li>
@@ -91,7 +90,7 @@ export function Contact() {
           </div>
         </div>
 
-        {/* Right side – Form */}
+        {/* Côté droit – Formulaire */}
         <div className="bg-gray-50 p-6 md:p-8 rounded-md shadow-md">
           {!submitted ? (
             <Form {...form}>
@@ -189,3 +188,5 @@ export function Contact() {
     </section>
   );
 }
+
+export default Contact;
