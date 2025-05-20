@@ -53,7 +53,7 @@ type AppointmentFormValues = z.infer<typeof appointmentFormSchema>;
 export default function AppointmentForm() {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
-  
+
   const form = useForm<AppointmentFormValues>({
     resolver: zodResolver(appointmentFormSchema),
     defaultValues: {
@@ -115,11 +115,11 @@ export default function AppointmentForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-dark font-semibold">Nom complet</FormLabel>
+                  <FormLabel className="text-gray-800 font-semibold">Nom complet</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Votre nom complet"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-dark"
+                      className="bg-white text-gray-900 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                       {...field}
                     />
                   </FormControl>
@@ -133,12 +133,12 @@ export default function AppointmentForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-dark font-semibold">Email</FormLabel>
+                  <FormLabel className="text-gray-800 font-semibold">Email</FormLabel>
                   <FormControl>
                     <Input
                       type="email"
                       placeholder="votre.email@exemple.com"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-dark"
+                      className="bg-white text-gray-900 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                       {...field}
                     />
                   </FormControl>
@@ -152,11 +152,11 @@ export default function AppointmentForm() {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-dark font-semibold">Téléphone</FormLabel>
+                  <FormLabel className="text-gray-800 font-semibold">Téléphone</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Votre numéro de téléphone"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-dark"
+                      className="bg-white text-gray-900 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                       {...field}
                     />
                   </FormControl>
@@ -170,64 +170,4 @@ export default function AppointmentForm() {
               name="service"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-dark font-semibold">Service souhaité</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-dark">
-                        <SelectValue placeholder="Sélectionnez un service" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {services.map((service) => (
-                        <SelectItem key={service.id} value={service.id}>
-                          {service.title}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-dark font-semibold">Message</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Précisez votre demande ou vos questions"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-dark"
-                      rows={4}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button
-              type="submit"
-              className="w-full bg-accent hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-md"
-              disabled={createAppointment.isPending}
-            >
-              {createAppointment.isPending ? (
-                <>
-                  <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
-                  Envoi en cours...
-                </>
-              ) : (
-                <>
-                  <i className="far fa-envelope mr-2">📩</i> Envoyer
-                </>
-              )}
-            </Button>
-          </form>
-        </Form>
-      </div>
-    </div>
-  );
-}
+                  <FormLabel
