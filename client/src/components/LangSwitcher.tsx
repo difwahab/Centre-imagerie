@@ -1,30 +1,32 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function LangSwitcher() {
+const LangSwitcher = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lang: 'fr' | 'ar') => {
+    console.log('Changing language to:', lang); // Log pour vérifier le changement de langue
     i18n.changeLanguage(lang);
-    // La direction est déjà gérée globalement via le listener 'languageChanged' dans i18n.ts
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   };
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-4 items-center">
       <button
         onClick={() => changeLanguage('fr')}
-        className={`text-sm font-medium hover:underline ${i18n.language === 'fr' ? 'underline font-semibold' : ''}`}
-        aria-label="Passer en français"
+        className="text-sm font-medium hover:underline"
       >
-        🇫🇷 Français
+        🇩🇿 Français
       </button>
       <span>|</span>
       <button
         onClick={() => changeLanguage('ar')}
-        className={`text-sm font-medium hover:underline ${i18n.language === 'ar' ? 'underline font-semibold' : ''}`}
-        aria-label="Passer en arabe"
+        className="text-sm font-medium hover:underline"
       >
-        🇩🇿 الجزائرية
+        🇩🇿 عربي
       </button>
     </div>
   );
-}
+};
+
+export default LangSwitcher;
