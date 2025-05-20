@@ -1,15 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// Vous pouvez ici connecter un service d'email comme SendGrid, Nodemailer, etc.
-// Pour l'exemple, on se contente de valider les données et de simuler un envoi.
-
 type Data = {
   success?: boolean;
-  message?: string;
   error?: string;
 };
 
-export default async function handler(
+export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
@@ -19,7 +15,6 @@ export default async function handler(
 
   const { name, email, message } = req.body;
 
-  // Validation basique côté serveur
   if (
     typeof name !== 'string' ||
     typeof email !== 'string' ||
@@ -30,19 +25,9 @@ export default async function handler(
     return res.status(400).json({ error: 'Données invalides.' });
   }
 
-  try {
-    // Simuler un traitement (ex. : envoi d’email, stockage, etc.)
-    console.log('Message reçu :', { name, email, message });
+  // Juste afficher les données dans la console (backend)
+  console.log('Message reçu :', { name, email, message });
 
-    // Réponse réussie
-    return res.status(200).json({
-      success: true,
-      message: 'Message reçu. Nous vous contacterons sous peu.',
-    });
-  } catch (error) {
-    console.error('Erreur serveur contact :', error);
-    return res
-      .status(500)
-      .json({ error: 'Erreur interne du serveur. Veuillez réessayer plus tard.' });
-  }
+  // Répondre succès sans rien enregistrer ni envoyer
+  return res.status(200).json({ success: true });
 }
