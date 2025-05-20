@@ -10,12 +10,14 @@ export default function LangSwitcher() {
 
   return (
     <div className="flex gap-2 items-center">
+      {/* Drapeau Algérie pour Français */}
       <button onClick={() => changeLanguage('fr')} className="text-sm font-medium hover:underline">
-        🇫🇷 Français
+        🇩🇿 Français
       </button>
       <span>|</span>
+      {/* Drapeau Algérie pour Arabe */}
       <button onClick={() => changeLanguage('ar')} className="text-sm font-medium hover:underline">
-        🇸🇦 عربي
+        🇩🇿 عربي
       </button>
     </div>
   );
