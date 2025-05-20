@@ -21,15 +21,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-// Vous pouvez contrôler ici la langue
-const lang = 'fr'; // ou 'ar'
+// Choix de la langue : 'fr' ou 'ar'
+const lang = 'fr'; // change à 'ar' pour arabe
 const isAr = lang === 'ar';
 
 const t = {
   title: isAr ? 'اتصل بنا' : 'Contactez-nous',
   description: isAr
     ? 'لأي استفسار، أو طلب موعد، لا تتردد في مراسلتنا عبر هذا النموذج.'
-    : 'Pour toute question, demande de rendez-vous ou information complémentaire, n\'hésitez pas à nous écrire via ce formulaire.',
+    : "Pour toute question, demande de rendez-vous ou information complémentaire, n'hésitez pas à nous écrire via ce formulaire.",
   name: isAr ? 'الاسم الكامل' : 'Nom complet',
   email: isAr ? 'البريد الإلكتروني' : 'Adresse email',
   message: isAr ? 'الرسالة' : 'Message',
@@ -45,14 +45,14 @@ const t = {
 };
 
 const formSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  message: z.string().min(10),
+  name: z.string().min(2, isAr ? 'الاسم قصير جدًا' : 'Le nom est trop court'),
+  email: z.string().email(isAr ? 'البريد الإلكتروني غير صالح' : "Adresse email invalide"),
+  message: z.string().min(10, isAr ? 'الرسالة قصيرة جدًا' : 'Le message est trop court'),
 });
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
-function Contact() {
+export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   const form = useForm<ContactFormValues>({
@@ -62,13 +62,8 @@ function Contact() {
 
   const mutation = useMutation({
     mutationFn: async (data: ContactFormValues) => {
-      try {
-        const response = await axios.post('/api/contact', data);
-        return response.data;
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
+      const response = await axios.post('/api/contact', data);
+      return response.data;
     },
     onSuccess: () => {
       toast({ title: t.successTitle });
@@ -93,7 +88,14 @@ function Contact() {
             <li><strong>{isAr ? 'البريد الإلكتروني :' : 'Email :'}</strong> cherif.benameur@gmail.com</li>
           </ul>
           <div className="mt-6 w-full aspect-video rounded-md overflow-hidden">
-            <Image src="/map.jpg" alt="Carte" width={600} height={400} className="object-cover w-full h-full" priority />
+            <Image
+              src="/map.jpg"
+              alt="Carte"
+              width={600}
+              height={400}
+              className="object-cover w-full h-full"
+              priority
+            />
           </div>
         </div>
 
@@ -163,5 +165,3 @@ function Contact() {
     </section>
   );
 }
-
-export default Contact;
