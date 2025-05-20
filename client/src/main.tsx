@@ -1,3 +1,4 @@
+import './i18n'; // doit être importé avant le rendu de React
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
