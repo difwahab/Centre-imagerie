@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import Map from "@/components/Map";
 import { 
   contactInfo, 
   workingHours, 
@@ -36,6 +35,7 @@ import {
   Linkedin,
   CheckCircle
 } from "lucide-react";
+import MapReactLeaflet from "@/components/MapReactLeaflet";
 
 const contactFormSchema = z.object({
   name: z.string().min(3, {
@@ -197,7 +197,7 @@ export default function Contact() {
             </div>
             
             {/* Map Component */}
-            <Map />
+            <MapReactLeaflet />
           </div>
         </div>
       </section>
