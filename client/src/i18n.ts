@@ -11,24 +11,18 @@ const resources = {
 };
 
 i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
+  .use(LanguageDetector) // Permet la détection automatique de la langue du navigateur
+  .use(initReactI18next) // Intègre i18next avec React
   .init({
     resources,
     fallbackLng: 'fr',
     interpolation: { escapeValue: false },
     detection: {
       // Désactive la détection automatique si tu veux forcer manuellement la langue
-      // Ou laisse true si tu veux détecter la langue du navigateur
       order: ['localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
       caches: ['localStorage'],
     },
   });
-
-// Applique la langue stockée dans localStorage ou 'fr' par défaut
-const storedLang = localStorage.getItem('i18nextLng') || 'fr';
-i18n.changeLanguage(storedLang);
-document.documentElement.dir = storedLang === 'ar' ? 'rtl' : 'ltr';
 
 // Sauvegarde la langue à chaque changement
 i18n.on('languageChanged', (lng) => {
