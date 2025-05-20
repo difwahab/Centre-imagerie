@@ -53,7 +53,7 @@ type AppointmentFormValues = z.infer<typeof appointmentFormSchema>;
 export default function AppointmentForm() {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
-  
+
   const form = useForm<AppointmentFormValues>({
     resolver: zodResolver(appointmentFormSchema),
     defaultValues: {
@@ -73,7 +73,8 @@ export default function AppointmentForm() {
     onSuccess: () => {
       toast({
         title: "Rendez-vous demandé",
-        description: "Nous vous contacterons bientôt pour confirmer votre rendez-vous.",
+        description:
+          "Nous vous contacterons bientôt pour confirmer votre rendez-vous.",
         variant: "default",
       });
       form.reset();
@@ -82,7 +83,8 @@ export default function AppointmentForm() {
     onError: (error: any) => {
       toast({
         title: "Erreur",
-        description: error.message || "Une erreur s'est produite. Veuillez réessayer.",
+        description:
+          error.message || "Une erreur s'est produite. Veuillez réessayer.",
         variant: "destructive",
       });
     },
@@ -96,14 +98,20 @@ export default function AppointmentForm() {
     return (
       <div className="bg-white rounded-lg shadow-xl overflow-hidden p-8 text-center">
         <div className="mb-6 text-5xl text-green-500">✓</div>
-        <h3 className="text-2xl font-bold text-primary mb-4">Demande envoyée avec succès</h3>
+        <h3 className="text-2xl font-bold text-primary mb-4">
+          Demande envoyée avec succès
+        </h3>
         <p className="text-lg mb-6">
-          Merci pour votre demande de rendez-vous. Notre équipe vous contactera sous peu pour confirmer les détails.
+          Merci pour votre demande de rendez-vous. Notre équipe vous contactera
+          sous peu pour confirmer les détails.
         </p>
         <Button onClick={() => setSubmitted(false)}>Retour</Button>
       </div>
     );
   }
+
+  const inputClass =
+    "px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 placeholder-gray-400 focus:text-gray-900";
 
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
@@ -115,12 +123,15 @@ export default function AppointmentForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-900 font-semibold">Nom complet</FormLabel>
+                  <FormLabel className="text-gray-900 font-semibold">
+                    Nom complet
+                  </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Votre nom complet"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900"
+                      className={inputClass}
                       {...field}
+                      style={{ color: "#1a202c" }}
                     />
                   </FormControl>
                   <FormMessage />
@@ -138,8 +149,9 @@ export default function AppointmentForm() {
                     <Input
                       type="email"
                       placeholder="votre.email@exemple.com"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900"
+                      className={inputClass}
                       {...field}
+                      style={{ color: "#1a202c" }}
                     />
                   </FormControl>
                   <FormMessage />
@@ -156,8 +168,9 @@ export default function AppointmentForm() {
                   <FormControl>
                     <Input
                       placeholder="Votre numéro de téléphone"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900"
+                      className={inputClass}
                       {...field}
+                      style={{ color: "#1a202c" }}
                     />
                   </FormControl>
                   <FormMessage />
@@ -170,10 +183,16 @@ export default function AppointmentForm() {
               name="service"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-900 font-semibold">Service souhaité</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <FormLabel className="text-gray-900 font-semibold">
+                    Service souhaité
+                  </FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    className="text-gray-900"
+                  >
                     <FormControl>
-                      <SelectTrigger className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900">
+                      <SelectTrigger className={inputClass}>
                         <SelectValue placeholder="Sélectionnez un service" />
                       </SelectTrigger>
                     </FormControl>
@@ -199,9 +218,10 @@ export default function AppointmentForm() {
                   <FormControl>
                     <Textarea
                       placeholder="Précisez votre demande ou vos questions"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900"
+                      className={inputClass}
                       rows={4}
                       {...field}
+                      style={{ color: "#1a202c" }}
                     />
                   </FormControl>
                   <FormMessage />
