@@ -5,21 +5,25 @@ export default function LangSwitcher() {
 
   const changeLanguage = (lang: 'fr' | 'ar') => {
     i18n.changeLanguage(lang);
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'; // Ajoute la direction du texte (pour arabe)
+    // La direction est déjà gérée globalement via le listener 'languageChanged' dans i18n.ts
   };
 
   return (
     <div className="flex gap-2 items-center">
-      {/* Bouton pour changer la langue en Français */}
-      <button onClick={() => changeLanguage('fr')} className="text-sm font-medium hover:underline">
-        🇩🇿 Français
+      <button
+        onClick={() => changeLanguage('fr')}
+        className={`text-sm font-medium hover:underline ${i18n.language === 'fr' ? 'underline font-semibold' : ''}`}
+        aria-label="Passer en français"
+      >
+        🇫🇷 Français
       </button>
-
       <span>|</span>
-
-      {/* Bouton pour changer la langue en Arabe */}
-      <button onClick={() => changeLanguage('ar')} className="text-sm font-medium hover:underline">
-        🇩🇿 عربي
+      <button
+        onClick={() => changeLanguage('ar')}
+        className={`text-sm font-medium hover:underline ${i18n.language === 'ar' ? 'underline font-semibold' : ''}`}
+        aria-label="Passer en arabe"
+      >
+        🇩🇿 الجزائرية
       </button>
     </div>
   );
