@@ -50,3 +50,10 @@ app.listen(PORT, () => {
 }).on("error", (err) => {
   console.error(`❌ Erreur serveur : ${err.message}`);
 });
+app.use(express.static(path.join(__dirname, "../client"), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'text/javascript');
+    }
+  }
+}));
