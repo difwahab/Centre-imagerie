@@ -33,7 +33,7 @@ export async function setupVite(app: Express, server: Server) {
 
 // 📦 Serveur statique en production
 export function serveStatic(app: Express) {
-  const staticPath = path.resolve(__dirname, '../dist/client');
+  const staticPath = path.resolve(__dirname, '../client/dist'); // ✅ Corrigé ici
 
   if (!fs.existsSync(staticPath)) {
     console.warn('⚠️ Dossier statique introuvable :', staticPath);
@@ -47,7 +47,7 @@ export function serveStatic(app: Express) {
     const indexPath = path.join(staticPath, 'index.html');
 
     if (!fs.existsSync(indexPath)) {
-      console.error('❌ Fichier `index.html` manquant dans `dist/client` !');
+      console.error('❌ Fichier `index.html` manquant dans `client/dist` !');
       return res.status(404).send('Erreur : Fichier introuvable.');
     }
 
