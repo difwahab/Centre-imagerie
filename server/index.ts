@@ -27,7 +27,7 @@ app.get("/route-du-get", (req, res) => {
 });
 
 // ✅ Gestion des fichiers statiques
-const distPath = path.resolve(__dirname, "public");
+const distPath = path.resolve(__dirname, "../client");
 if (!fs.existsSync(distPath)) {
   console.warn(`⚠️ Dossier public introuvable : ${distPath}. Vérifie la compilation.`);
 }

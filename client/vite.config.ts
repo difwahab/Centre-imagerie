@@ -5,7 +5,7 @@ import path from 'path';
 import history from 'connect-history-api-fallback';
 
 export default defineConfig({
-  root: path.resolve(__dirname, 'client'),
+  root: ("client"),
 
   plugins: [
     react(),
