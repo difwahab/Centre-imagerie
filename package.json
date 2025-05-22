@@ -14,7 +14,8 @@
     "start:prod": "npm run build && npm start",
     "check": "tsc --noEmit",
     "preview": "vite preview --config client/vite.config.ts",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "deploy": "./deploy.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -23,7 +24,6 @@
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-popover": "^1.1.14",
     "@radix-ui/react-select": "^2.2.5",
-    "@radix-ui/react-switch": "^1.2.5",
     "axios": "^1.9.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
