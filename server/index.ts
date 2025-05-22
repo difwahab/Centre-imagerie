@@ -1,85 +1,47 @@
-// server/index.ts
-import express from 'express';
-import session from 'express-session';
-import cors from 'cors';
-import helmet from 'helmet';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import pgSession from 'connect-pg-simple';
-import { Pool } from 'pg';
+import * as express from "express";
+import * as cors from "cors";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
-// Charger les variables d'environnement
-dotenv.config();
+const __dirname = path.dirname(fileURLToPath(import.meta.url)); // Correction
+import { Application } from "express";
 
-// Récupération de __dirname pour les modules ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const app: Application = express();
 
-// Initialisation de l'application Express
-const app = express();
-
-// Middlewares de sécurité
-app.use(helmet());
-
-// Middleware CORS
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true,
-}));
-
-// Middleware pour parser le JSON
+// ✅ Configuration des middlewares
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Configuration de la session avec PostgreSQL
-const PgSession = pgSession(session);
-
-app.use(session({
-  store: new PgSession({
-    pool: new Pool({ connectionString: process.env.DATABASE_URL }),
-    tableName: 'session',
-  }),
-  secret: process.env.SESSION_SECRET || 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24, // 1 jour
-  },
-}));
-
-// Exemple de route API
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok' });
+// ✅ Middleware pour afficher les requêtes reçues
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
 });
 
-// ⚠️ En production, servir le frontend compilé
-if (process.env.NODE_ENV === 'production') {
-  const clientBuildPath = path.join(__dirname, '../dist/client');
-  app.use(express.static(clientBuildPath));
+// ✅ Route GET corrigée
+app.get("/route-du-get", (req, res) => {
+  console.log("Requête GET reçue !");
+  res.json({ message: "GET fonctionne !" });
+});
 
-  // Rediriger toutes les autres routes vers index.html (SPA)
-  app.get('*', (_req, res) => {
-    res.sendFile(path.join(clientBuildPath, 'index.html'));
-  });
+// ✅ Gestion des fichiers statiques
+const distPath = path.resolve(__dirname, "public");
+if (!fs.existsSync(distPath)) {
+  console.warn(`⚠️ Dossier public introuvable : ${distPath}. Vérifie la compilation.`);
 }
+app.use(express.static(distPath));
 
-// Démarrer le serveur
+// ✅ Route de secours pour éviter "Cannot GET"
+app.use("*", (_req, res) => {
+  res.status(404).json({ error: "Page non trouvée" });
+});
+
+// ✅ Lancement du serveur avec gestion des erreurs
 const PORT = process.env.PORT || 3000;
-
-export async function startServer() {
-  try {
-    app.listen(PORT, () => {
-      console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
-    });
-  } catch (err) {
-    console.error('❌ Erreur au démarrage du serveur :', err);
-    process.exit(1);
-  }
-}
-
-// Lancer le serveur si ce fichier est exécuté directement
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  startServer();
-}
+app.listen(PORT, () => {
+  console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
+}).on("error", (err) => {
+  console.error(`❌ Erreur serveur : ${err.message}`);
+});
