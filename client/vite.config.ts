@@ -1,3 +1,4 @@
+// client/vite.config.ts
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vite';
@@ -5,13 +6,11 @@ import path from 'path';
 import history from 'connect-history-api-fallback';
 
 export default defineConfig({
-  root: ("client"),
-
   plugins: [
     react(),
-    tsconfigPaths(),
-
-    // Plugin personnalisé pour gérer les routes SPA
+    tsconfigPaths({
+      projects: [path.resolve(__dirname, '../tsconfig.client.json')],
+    }),
     {
       name: 'spa-fallback',
       configureServer(server) {
@@ -27,22 +26,21 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'client/src'),
-      '@shared': path.resolve(__dirname, 'shared'),
+      '@': path.resolve(__dirname, 'src'),
+      '@shared': path.resolve(__dirname, '../shared'),
     },
   },
 
   server: {
     port: 5173,
     strictPort: true,
-    host: '0.0.0.0', // pour GitHub Codespaces
+    host: '0.0.0.0',
     cors: true,
     open: false,
-    // ❌ NE PAS mettre `setupMiddlewares` ici
   },
 
   build: {
-    outDir: path.resolve(__dirname, 'dist/client'),
+    outDir: path.resolve(__dirname, '../dist/client'),
     emptyOutDir: true,
     sourcemap: true,
     minify: 'esbuild',

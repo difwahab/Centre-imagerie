@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 🌈 Variables CSS personnalisées */
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -21,11 +22,11 @@
   --input: 214.3 31.8% 91.4%;
   --ring: 221.2 83.2% 53.3%;
   --radius: 0.5rem;
-
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
 }
 
+/* 🌙 Mode sombre */
 .dark {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
@@ -46,8 +47,9 @@
   --ring: 224.3 76.3% 48%;
 }
 
+/* 🌐 Styles de base */
 @layer base {
-  * {
+  *, ::before, ::after {
     @apply border-border;
   }
 
@@ -61,6 +63,7 @@
   }
 }
 
+/* 🛠 Utilitaires personnalisés */
 @layer utilities {
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text;
@@ -75,7 +78,7 @@
   }
 }
 
-/* Scrollbar */
+/* 🎚 Scrollbar personnalisée */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -93,6 +96,7 @@
   @apply bg-primary;
 }
 
+/* 🧭 Comportement du scroll */
 html {
   scroll-behavior: smooth;
 }

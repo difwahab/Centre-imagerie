@@ -1,12 +1,13 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./client/src",                        // Base fixée sur client/src
+    "baseUrl": "./client/src",
     "paths": {
-      "@/*": ["*"],                                   // Fonctionne avec baseUrl
+      "@/*": ["*"],
       "@/components/*": ["components/*"],
       "@/utils/*": ["utils/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/hooks/*": ["hooks/*"],
+      "@/lib/*": ["lib/*"]
     },
     "types": ["vite/client"],
     "jsx": "react-jsx",
@@ -22,8 +23,11 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "allowJs": true,
-    "incremental": true
+    "allowJs": false,
+    "incremental": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "include": ["client/src"],
   "exclude": ["node_modules", "dist", "build", "**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts"]

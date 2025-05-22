@@ -1,59 +1,49 @@
-import express, { Application } from "express";
+import express, { type Express } from "express";
 import cors from "cors";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
+import http from "http";
+import { setupVite, serveStatic } from "./vite";
 
-// Obtenir __dirname (spécifique aux modules ES)
+// 📍 __dirname compatible ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const app: Application = express();
+// 📦 Créer l'application Express
+const app: Express = express();
 
-// Middleware CORS & body parsing
+// 📦 Créer le serveur HTTP pour HMR
+const server = http.createServer(app);
+
+// === Middlewares globaux ===
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Middleware de log des requêtes
-app.use((req, res, next) => {
+// 🪵 Logger simple
+app.use((req, _res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
 });
 
-// Exemple de route API
-app.get("/route-du-get", (req, res) => {
-  console.log("Requête GET reçue !");
-  res.json({ message: "GET fonctionne !" });
+// === Routes API ===
+app.get("/api/test", (_req, res) => {
+  res.json({ message: "API GET fonctionne !" });
 });
 
-// Dossier du frontend compilé (ex: Vite, React, etc.)
-const frontendDistPath = path.resolve(__dirname, "../client/dist");
-
-// Vérification du dossier
-if (!fs.existsSync(frontendDistPath)) {
-  console.warn(`⚠️ Dossier compilé introuvable : ${frontendDistPath}. Tu dois exécuter 'npm run build' dans le client.`);
+// === Intégration Vite (dev) ou Fichiers statiques (prod) ===
+if (process.env.NODE_ENV === "production") {
+  serveStatic(app);
+} else {
+  setupVite(app, server);
 }
 
-// Servir les fichiers statiques du frontend
-app.use(express.static(frontendDistPath));
+// === Démarrage du serveur ===
+const PORT = Number(process.env.PORT) || 3000;
 
-// Rediriger toutes les routes vers index.html (SPA)
-app.get("*", (_req, res) => {
-  res.sendFile(path.join(frontendDistPath, "index.html"));
-});
-
-// Lancement du serveur
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
 }).on("error", (err) => {
   console.error(`❌ Erreur serveur : ${err.message}`);
 });
-app.use(express.static(path.join(__dirname, "../client"), {
-  setHeaders: (res, path) => {
-    if (path.endsWith('.js')) {
-      res.setHeader('Content-Type', 'text/javascript');
-    }
-  }
-}));
