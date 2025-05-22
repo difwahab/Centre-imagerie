@@ -1,44 +1,49 @@
-import express from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url)); // Correction
-import { Application } from "express";
+// Obtenir __dirname (spécifique aux modules ES)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app: Application = express();
 
-// ✅ Configuration des middlewares
+// Middleware CORS & body parsing
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Middleware pour afficher les requêtes reçues
+// Middleware de log des requêtes
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
 });
 
-// ✅ Route GET corrigée
+// Exemple de route API
 app.get("/route-du-get", (req, res) => {
   console.log("Requête GET reçue !");
   res.json({ message: "GET fonctionne !" });
 });
 
-// ✅ Gestion des fichiers statiques
-const distPath = path.resolve(__dirname, "../client");
-if (!fs.existsSync(distPath)) {
-  console.warn(`⚠️ Dossier public introuvable : ${distPath}. Vérifie la compilation.`);
-}
-app.use(express.static(distPath));
+// Dossier du frontend compilé (ex: Vite, React, etc.)
+const frontendDistPath = path.resolve(__dirname, "../client/dist");
 
-// ✅ Route de secours pour éviter "Cannot GET"
-app.use("*", (_req, res) => {
-  res.status(404).json({ error: "Page non trouvée" });
+// Vérification du dossier
+if (!fs.existsSync(frontendDistPath)) {
+  console.warn(`⚠️ Dossier compilé introuvable : ${frontendDistPath}. Tu dois exécuter 'npm run build' dans le client.`);
+}
+
+// Servir les fichiers statiques du frontend
+app.use(express.static(frontendDistPath));
+
+// Rediriger toutes les routes vers index.html (SPA)
+app.get("*", (_req, res) => {
+  res.sendFile(path.join(frontendDistPath, "index.html"));
 });
 
-// ✅ Lancement du serveur avec gestion des erreurs
+// Lancement du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
