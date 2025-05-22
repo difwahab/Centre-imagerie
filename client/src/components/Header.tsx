@@ -29,7 +29,12 @@ export default function Header() {
     >
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link href="/" aria-label="Accueil - Centre D'Imagerie Benameur">
-          <a className="flex items-center space-x-2 cursor-pointer">
+          <a className="flex items-center space-x-3 cursor-pointer">
+            <img
+              src="/logo.jpeg"
+              alt="Logo du centre"
+              className="h-10 w-auto"
+            />
             <div className="font-bold text-2xl font-heading">
               <span className="text-primary">Centre D'Imagerie</span>{" "}
               <span className="text-secondary">Benameur</span>
@@ -38,7 +43,11 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation + Lang Switcher */}
-        <nav className="hidden md:flex items-center space-x-8 text-dark font-medium" role="navigation" aria-label="Menu principal">
+        <nav
+          className="hidden md:flex items-center space-x-8 text-dark font-medium"
+          role="navigation"
+          aria-label="Menu principal"
+        >
           <NavLink href="/" label="Accueil" />
           <NavLink href="/services" label="Services" />
           <NavLink href="/temoignages" label="Témoignages" />

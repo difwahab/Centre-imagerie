@@ -3,8 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { contactInfo } from '@/lib/constants';
 
-// Corrige l'icône par défaut de Leaflet qui ne s'affiche pas sans config
-delete L.Icon.Default.prototype._getIconUrl;
+// Correction : Suppression de `_getIconUrl`, qui n'est plus nécessaire
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
   iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -12,7 +11,8 @@ L.Icon.Default.mergeOptions({
 });
 
 export default function MapReactLeaflet() {
-  const position = [contactInfo.location.lat, contactInfo.location.lng];
+  // Assurer que position est bien typé
+  const position: [number, number] = [contactInfo.location.lat, contactInfo.location.lng];
 
   return (
     <div className="my-8">

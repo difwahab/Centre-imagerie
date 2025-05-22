@@ -1,0 +1,54 @@
+import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vite';
+import path from 'path';
+import history from 'connect-history-api-fallback';
+
+export default defineConfig({
+  root: path.resolve(__dirname, 'client'),
+
+  plugins: [
+    react(),
+    tsconfigPaths(),
+
+    // Plugin personnalisé pour gérer les routes SPA
+    {
+      name: 'spa-fallback',
+      configureServer(server) {
+        server.middlewares.use(
+          history({
+            disableDotRule: true,
+            htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
+          })
+        );
+      },
+    },
+  ],
+
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'client/src'),
+      '@shared': path.resolve(__dirname, 'shared'),
+    },
+  },
+
+  server: {
+    port: 5173,
+    strictPort: true,
+    host: '0.0.0.0', // pour GitHub Codespaces
+    cors: true,
+    open: false,
+    // ❌ NE PAS mettre `setupMiddlewares` ici
+  },
+
+  build: {
+    outDir: path.resolve(__dirname, 'dist/client'),
+    emptyOutDir: true,
+    sourcemap: true,
+    minify: 'esbuild',
+  },
+
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+  },
+});
